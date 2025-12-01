@@ -28,7 +28,19 @@ namespace ApiProject
             */
             var builder = WebApplication.CreateBuilder(args);
 
-           
+            // CORS -> to controll API calls from the browser
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost", policy =>
+                {
+                    policy
+                        .AllowAnyHeader() // Accept any HTTP header
+                        .AllowAnyMethod() // Accept any HTTP method (GET, POST, etc.)
+                        .WithOrigins("http://localhost:5173", "http://localhost:3000");
+                });
+            });
+
+            
         }
     }
 }
