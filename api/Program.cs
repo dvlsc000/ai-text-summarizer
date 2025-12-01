@@ -53,7 +53,14 @@ namespace ApiProject
             // Root endpoint health check
             app.MapGet("/", () => "AI Summarizer API is running!");
 
-           
+            /* POST endpont
+            */
+            app.MapPost("/summarize", (SummarizeRequest request) =>
+            {
+               
+            });
+
+            app.Run();
         }
     }
 }
