@@ -53,11 +53,29 @@ namespace ApiProject
             // Root endpoint health check
             app.MapGet("/", () => "AI Summarizer API is running!");
 
-            /* POST endpont
-            */
+            // POST endpont
             app.MapPost("/summarize", (SummarizeRequest request) =>
             {
-               
+                // IF text is null or whitespace, return bad request
+                if (string.IsNullOrWhiteSpace(request.Text))
+                {
+                    return Results.BadRequest("Text is required.");
+                }
+                /* Fake summarization logic for demonstration purposes
+                    -> If text length > 100, return first 100 characters as summary
+                */ 
+                var fakeSummary = request.Text.Length > 100
+                    ? request.Text.Substring(0, 100) + "..."
+                    : request.Text + " (short text, nothing to summarize)";
+
+                // Wrap the summary in a response object
+                var response = new SummarizeResponse
+                {
+                    Summary = fakeSummary
+                };
+                
+                // Return the response with 200 OK status
+                return Results.Ok(response);
             });
 
             app.Run();
