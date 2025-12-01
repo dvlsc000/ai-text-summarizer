@@ -50,28 +50,10 @@ namespace ApiProject
             app.UseHttpsRedirection();
             app.UseCors("AllowLocalhost");
 
+            // Root endpoint health check
             app.MapGet("/", () => "AI Summarizer API is running!");
 
-            app.MapPost("/summarize", (SummarizeRequest request) =>
-            {
-                if (string.IsNullOrWhiteSpace(request.Text))
-                {
-                    return Results.BadRequest("Text is required.");
-                }
-
-                var fakeSummary = request.Text.Length > 100
-                    ? request.Text.Substring(0, 100) + "..."
-                    : request.Text + " (short text, nothing to summarize)";
-
-                var response = new SummarizeResponse
-                {
-                    Summary = fakeSummary
-                };
-
-                return Results.Ok(response);
-            });
-
-            app.Run();
+           
         }
     }
 }
