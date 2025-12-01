@@ -1,8 +1,12 @@
-
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiProject
 {
-    // Request and Response DTOs -> data going in and out of the API
+    // Request and Response DTOs -> data going in 
     public class SummarizeRequest
     {
         public string Text { get; set; } = string.Empty;
@@ -17,7 +21,14 @@ namespace ApiProject
     {
         public static void Main(string[] args)
         {
-     
+            /* Create a buider object that:
+                Loads configuration
+                Sets up logging
+                Prepares depdencey injection
+            */
+            var builder = WebApplication.CreateBuilder(args);
+
+           
         }
     }
 }
